@@ -1,6 +1,6 @@
 package io.zipcoder.casino.DiceGames.LastChance;
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
 import io.zipcoder.casino.utilities.BasePlayer;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class LastChanceTest {
 
 
 }
-=======
+/*=======
 import io.zipcoder.casino.DiceGames.LastChance.LastChance;
 import io.zipcoder.casino.utilities.BasePlayer;
 import io.zipcoder.casino.utilities.ConsoleIO;
@@ -69,8 +69,8 @@ public class LastChanceTest {
         int iBet = 10;
         int iMultiplier = 5;
 //        assertEquals(50, LastChance.setupGame(iBet, iMultiplier));
-    }
+    }*/
 
 
-}
->>>>>>> abcc2f825910283c0453c5c77134fd13828d5e58
+//}
+/*>>>>>>> abcc2f825910283c0453c5c77134fd13828d5e58*/
