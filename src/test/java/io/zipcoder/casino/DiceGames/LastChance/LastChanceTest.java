@@ -31,7 +31,7 @@ public class LastChanceTest {
         int iBet = 10;
         int iMultiplier = 5;
 //        assertEquals(50, LastChance.setupGame(iBet, iMultiplier));
-    }*/
+    }
 
 
 }
