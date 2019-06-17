@@ -12,6 +12,12 @@ public class Blackjack extends CardGame implements GamblingGame {
     private Integer minBet;
     private BlackjackPlayer player;
     private BlackjackPlayer dealer;
+
+
+
+    private Integer tester;
+
+
     private Integer betAmount;
 
 
@@ -19,6 +25,10 @@ public class Blackjack extends CardGame implements GamblingGame {
     private Boolean currentGame = true;
     private Integer dealerHandValue;
     boolean isRunning = true;
+
+
+
+    private String playerAnswer;
 
 
 
@@ -72,19 +82,24 @@ public class Blackjack extends CardGame implements GamblingGame {
             if(dealerBustCheck()){
                 console.println("You won " + betAmount*2);
                 player.addToWallet(betAmount*2);
+                tester = 1;
             }else if(playerBustCheck()){
                 console.println("You lost " + betAmount);
+                tester = 2;
 
             }else if(playerHandValue() > dealerHandValue()){
                 console.println("You won " + betAmount*2);
                 player.addToWallet(betAmount*2);
+                tester=3;
 
             }else if(playerHandValue() < dealerHandValue()){
                 console.println("You lost " + betAmount);
+                tester = 4;
 
             }else if(playerHandValue().equals(dealerHandValue())){
                 player.addToWallet(betAmount);
                 console.println("It was a push");
+                tester =5;
             }
 
 
@@ -151,7 +166,7 @@ public class Blackjack extends CardGame implements GamblingGame {
             console.print("Dealer hand: " + Hand.showHand((ArrayList<Card>) dealer.hand));
         }
         public boolean checkPlayerAnswer(Console console){
-        String playerAnswer = console.getStringInput("\nWould you like to hit or stay?");
+        playerAnswer = console.getStringInput("\nWould you like to hit or stay?");
         if(playerAnswer.toUpperCase().equals("HIT")){
 
             player.hand.add(draw());
@@ -255,14 +270,23 @@ public class Blackjack extends CardGame implements GamblingGame {
             return answer;
 
         }
-    public boolean isPlayerTurn() {
-        return playerTurn;
-    }
+
     public Boolean getCurrentGame() {
         return currentGame;
     }
     public Boolean getPlayerTurn(){return playerTurn;}
-
+    public String getPlayerAnswer() {
+        return playerAnswer;
+    }
+    public void setPlayerAnswer(String playerAnswer) {
+        this.playerAnswer = playerAnswer;
+    }
+    public void setBetAmount(Integer betAmount) {
+        this.betAmount = betAmount;
+    }
+    public Integer getTester() {
+        return tester;
+    }
 
     }
 

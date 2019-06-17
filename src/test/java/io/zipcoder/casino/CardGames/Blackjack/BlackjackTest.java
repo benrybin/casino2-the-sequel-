@@ -68,16 +68,59 @@ public class BlackjackTest {
         //getHandSize
     }
     @Test
-    public void canPlayerHitonBust(){
-        // Deck deck = new deck
-        //
+    //should be true
+    public void canPlayerBust(){
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.JACK,  Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.QUEEN, Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.KING,  Suit.CLUBS.getSuitImage()));
+
+        player.setHand(hand);
+         boolean answer = b.playerBustCheck();
+        boolean expected = true;
+         Assert.assertEquals(expected,answer);
     }
     @Test
-    public void canDealerBust(){}
+    //should be false
+    public void canPlayerBustfalse(){
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.JACK,  Suit.CLUBS.getSuitImage()));
+
+
+        player.setHand(hand);
+        boolean answer = b.playerBustCheck();
+        boolean expected = false;
+        Assert.assertEquals(expected,answer);
+    }
     @Test
-    public void isWin() {
+    public void canDealerBust(){
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.JACK,  Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.QUEEN, Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.KING,  Suit.CLUBS.getSuitImage()));
+
+        dealer.setHand(hand);
+        boolean answer = b.dealerBustCheck();
+        boolean expected = true;
+        Assert.assertEquals(expected,answer);
 
     }
+    @Test
+    public void candealerBustfalse() {
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.TEN, Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.JACK, Suit.CLUBS.getSuitImage()));
+
+
+        dealer.setHand(hand);
+        boolean answer = b.dealerBustCheck();
+        boolean expected = false;
+        Assert.assertEquals(expected, answer);
+    }
+
 
     @Test
     public void switchTurns() {
@@ -98,7 +141,7 @@ public class BlackjackTest {
 
     }
     @Test
-    public void test45(){
+    public void scoreChecker(){
         hand.clear();
         hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
         hand.add(new Card(Suit.CLUBS, Rank.JACK,  Suit.CLUBS.getSuitImage()));
@@ -110,7 +153,7 @@ public class BlackjackTest {
 
     }
     @Test
-    public void test46(){
+    public void scoreChecker2(){
         hand.clear();
         hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
 
@@ -154,15 +197,7 @@ public class BlackjackTest {
         Assert.assertEquals(expected,answer);
     }
 
-    @Test
-    public void playerBustCheck() {
 
-
-    }
-
-    @Test
-    public void dealerBustCheck() {
-    }
 
     @Test
     public void setupBoardPlayer() {
@@ -185,5 +220,82 @@ public class BlackjackTest {
         Boolean answer = b.getCurrentGame();
         Boolean expected = true;
         Assert.assertEquals(expected,answer);
+    }
+
+    @Test
+    public void whoWondealerbusts() {
+        b.setBetAmount(10);
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.JACK,  Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.QUEEN, Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.KING,  Suit.CLUBS.getSuitImage()));
+
+        dealer.setHand(hand);
+        b.dealerBustCheck();
+        b.whoWon(console);
+        Integer answer = player.getWallet();
+        Integer expected = 100020;
+        Assert.assertEquals(expected,answer);
+
+
+    }
+    @Test
+    public void whowonplayerrbusts() {
+        b.setBetAmount(10);
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.JACK,  Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.QUEEN, Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.KING,  Suit.CLUBS.getSuitImage()));
+
+        player.setHand(hand);
+        b.playerBustCheck();
+        b.whoWon(console);
+        Integer answer = b.getTester();
+        Integer expected = 2;
+        Assert.assertEquals(expected,answer);
+
+
+    }
+
+    @Test
+    public void getCurrentGame() {
+    }
+
+    @Test
+    public void getPlayerTurn() {
+    }
+
+    @Test
+    public void checkPlayerAnswer() {
+
+        /*b.setPlayerAnswer("Hit");
+
+        b.setPlayerAnswer("STAY");
+        Integer answer =  player.hand.size();
+        Integer expected = 3;
+        Assert.assertEquals(expected,answer);*/
+    }
+    @Test
+    public void checkPlayerAnswer2() {
+        b.setPlayerAnswer("Stay");
+        Integer answer =  player.hand.size();
+        Integer expected = 2;
+        Assert.assertEquals(expected,answer);
+    }
+
+    @Test
+    public void dealerTurn() {
+        hand.clear();
+        hand.add(new Card(Suit.CLUBS, Rank.SEVEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.CLUBS, Rank.TEN,   Suit.CLUBS.getSuitImage()));
+        hand.add(new Card(Suit.HEARTS, Rank.ACE, Suit.HEARTS.getSuitImage()));
+        dealer.setHand(hand);
+        b.dealerTurn(console);
+        Boolean answer =  b.getCurrentGame();
+        Boolean expected = false;
+        Assert.assertEquals(expected,answer);
+
     }
 }
